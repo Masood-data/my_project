@@ -1,19 +1,34 @@
-def ASSIGNMENT(new_list, i, old_list, j):
-    new_list[i] = old_list[j]
+def assignment(new_list: List, index_new: int, old_list: List, index_old: int) -> None:
+    """
+    Assigns a value from old_list to new_list at specified positions.
+    
+    Args:
+        new_list (List): The list to update.
+        index_new (int): Index in new_list.
+        old_list (List): The source list.
+        index_old (int): Index in old_list.
+    """
+    new_list[index_new] = old_list[index_old]
 
 
-def mergeSort(list_to_sort_by_merge):
+def merge_sort(arr: List) -> None:
+    """
+    Sorts a list in-place using the merge sort algorithm.
+
+    Args:
+        arr (List): The list to be sorted.
+    """
     if (
-        len(list_to_sort_by_merge) > 1
-        and not len(list_to_sort_by_merge) < 1
-        and len(list_to_sort_by_merge) != 0
+        len(arr) > 1
+        and not len(arr) < 1
+        and len(arr) != 0
     ):
-        mid = len(list_to_sort_by_merge) // 2
-        left = list_to_sort_by_merge[:mid]
-        right = list_to_sort_by_merge[mid:]
+        mid = len(arr) // 2
+        left = arr[:mid]
+        right = arr[mid:]
 
-        mergeSort(left)
-        mergeSort(right)
+        merge_sort(left)
+        merge_sort(right)
 
         l = 0
         r = 0
@@ -21,10 +36,10 @@ def mergeSort(list_to_sort_by_merge):
 
         while l < len(left) and r < len(right):
             if left[l] <= right[r]:
-                ASSIGNMENT(new_list=list_to_sort_by_merge, i=i, old_list=left, j=l)
+                assignment(new_list=arr, i=i, old_list=left, j=l)
                 l += 1
             else:
-                ASSIGNMENT(new_list=list_to_sort_by_merge, i=i, old_list=right, j=r)
+                assignment(new_list=arr, i=i, old_list=right, j=r)
                 r += 1
             i += 1
 
