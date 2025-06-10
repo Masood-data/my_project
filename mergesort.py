@@ -26,14 +26,13 @@ def merge_sort(arr: List) -> None:
         mid = len(arr) // 2
         left = arr[:mid]
         right = arr[mid:]
-
+        # Recursively sort both sublists
         merge_sort(left)
         merge_sort(right)
 
-        l = 0
-        r = 0
-        i = 0
+        l = r =  i = 0 # Index counters
 
+        # Merge the two sorted halves
         while l < len(left) and r < len(right):
             if left[l] <= right[r]:
                 assignment(new_list=arr, i=i, old_list=left, j=l)
@@ -43,11 +42,13 @@ def merge_sort(arr: List) -> None:
                 r += 1
             i += 1
 
+        # Copy remaining elements from left_half (if any)
         while l < len(left):
             list_to_sort_by_merge[i] = left[l]
             l += 1
             i += 1
-
+        
+        # Copy remaining elements from right_half (if any)
         while r < len(right):
             list_to_sort_by_merge[i] = right[r]
             r += 1
@@ -60,7 +61,7 @@ my_list = [54, 26, 93, 17, 77, 31, 44, 55, 20]
 x = range(len(my_list))
 plt.plot(x, my_list)
 plt.show()
-mergeSort(my_list)
+merge_sort(my_list)
 x = range(len(my_list))
 plt.plot(x, my_list)
 plt.show()
