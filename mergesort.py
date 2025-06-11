@@ -1,3 +1,4 @@
+from typing import List
 def assignment(new_list: List, index_new: int, old_list: List, index_old: int) -> None:
     """
     Assigns a value from old_list to new_list at specified positions.
@@ -17,42 +18,45 @@ def merge_sort(arr: List) -> None:
 
     Args:
         arr (List): The list to be sorted.
+    Returns:
+        None: The list is sorted in-place.
     """
     if (
         len(arr) > 1
         and not len(arr) < 1
         and len(arr) != 0
     ):
+        # Divide the list into two halves.
         mid = len(arr) // 2
-        left = arr[:mid]
-        right = arr[mid:]
+        left_half = arr[:mid]
+        right_half = arr[mid:]
         # Recursively sort both sublists
-        merge_sort(left)
-        merge_sort(right)
+        merge_sort(left_half)
+        merge_sort(right_half)
 
-        l = r =  i = 0 # Index counters
+        left_index = right_index =  merged_list_index = 0 # Index counters
 
         # Merge the two sorted halves
-        while l < len(left) and r < len(right):
-            if left[l] <= right[r]:
-                assignment(new_list=arr, i=i, old_list=left, j=l)
-                l += 1
+        while left_index < len(left_half) and right_index < len(right_half):
+            if left_half[left_index] <= right_half[right_index]:
+                assignment(new_list=arr, index_new=merged_list_index, old_list=left_half, index_old=left_index)
+                left_index += 1
             else:
-                assignment(new_list=arr, i=i, old_list=right, j=r)
-                r += 1
-            i += 1
+                assignment(new_list=arr, index_new=merged_list_index, old_list=right_half, index_old=right_index)
+                right_index += 1
+            merged_list_index += 1
 
         # Copy remaining elements from left_half (if any)
-        while l < len(left):
-            list_to_sort_by_merge[i] = left[l]
-            l += 1
-            i += 1
+        while left_index < len(left_half):
+            arr[merged_list_index] = left_half[left_index]
+            left_index += 1
+            merged_list_index += 1
         
         # Copy remaining elements from right_half (if any)
-        while r < len(right):
-            list_to_sort_by_merge[i] = right[r]
-            r += 1
-            i += 1
+        while right_index < len(right_half):
+            arr[merged_list_index] = right_half[right_index]
+            right_index += 1
+            merged_list_index += 1
 
 
 import matplotlib.pyplot as plt
