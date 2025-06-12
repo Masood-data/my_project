@@ -1,4 +1,5 @@
 from typing import List
+
 def assignment(new_list: List, index_new: int, old_list: List, index_old: int) -> None:
     """
     Assigns a value from old_list to new_list at specified positions.
@@ -58,14 +59,30 @@ def merge_sort(arr: List) -> None:
             right_index += 1
             merged_list_index += 1
 
-
 import matplotlib.pyplot as plt
+            
+def visualize_list(data, title="List Visualization"):
+    """
+    Plots the given list using matplotlib.
 
-my_list = [54, 26, 93, 17, 77, 31, 44, 55, 20]
-x = range(len(my_list))
-plt.plot(x, my_list)
-plt.show()
-merge_sort(my_list)
-x = range(len(my_list))
-plt.plot(x, my_list)
-plt.show()
+
+    Args:
+        data (list): The list to be plotted.
+        title (str): The title of the plot.
+    """
+    
+    x_coords = range(len(data))
+    plt.figure(figsize=(10, 6)) # Set figure size for better readability.
+    plt.plot(x_coords, data, marker='o', linestyle='-', color='skyblue') # Add marker and color for clarity.
+    plt.title(title)
+    plt.xlabel("Index")
+    plt.ylabel("Value")
+    plt.grid(True)
+    plt.show()
+
+if __name__ == "__main__":
+    # Example usage
+    my_list_to_sort = [54, 26, 93, 17, 77, 31, 44, 55, 20]
+
+    print("Original list:", my_list_to_sort)
+    visualize_list(my_list_to_sort, "Original List")
